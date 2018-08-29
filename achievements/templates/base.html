@@ -1,0 +1,17 @@
+{% load bootstrap4 %}{% bootstrap_css %}{% bootstrap_javascript jquery="slim" %}<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title>{% block title %}Talent miner{% endblock %}</title>
+    {% block stylesheet %}{% endblock %}  <!-- HERE -->
+  </head>
+  <body>
+    
+    {% block body %}  <!-- HERE -->
+      <div class="container mt-5">
+        {% block content %}
+        {% endblock %}
+      </div>
+    {% endblock body %}  <!-- AND HERE -->
+  </body>
+</html>

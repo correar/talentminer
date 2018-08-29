@@ -1,0 +1,38 @@
+{% extends 'base.html' %}
+
+{% block content %}
+{% load bootstrap4 %}
+    <span class="d-block p-2 bg-primary text-white">Nova Tarefa</span>
+    <form action="" method="post" enctype="multipart/form-data" class="form mt-2">
+        {% csrf_token %}
+        {% bootstrap_form form %}
+        {% buttons %}
+            <button type="submit" class="btn btn-primary">Nova Tarefa</button>
+        {% endbuttons %}
+    </form>
+    
+    
+    {% for task in lastest_task_list %}
+        
+            <div class="row mt-2">
+                <div class="col-1 bg-light">           
+                    <img src="{{ task.icon.url }}" alt="{{ task.icon.url }}" class="img-thumbnail img-fluid rounded float-left" width="50px" height="50px">
+                </div>
+                <div class="col-3 bg-light">
+                    <div>
+                        <span class="font-weight-bold">{{ task.name }}</span>
+                    </div>
+                    <div class="bg-light">
+                        <small>{{ task.info_text }}</small>
+                    </div>    
+                </div>
+                <div class="col-1 bg-light">
+                    <div>
+                        <img src="{{ task.star.url }}" alt="{{ task.star.url }}" class="img-thumbnail img-fluid" width="50px" height="50px">
+                    </div>
+                </div>
+            </div> 
+        
+    {% endfor %}
+    
+{% endblock %}
