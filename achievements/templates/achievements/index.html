@@ -2,18 +2,11 @@
 
 {% block content %}
 {% load bootstrap4 %}
-    <span class="d-block p-2 bg-primary text-white">Nova Tarefa</span>
-    <form action="" method="post" enctype="multipart/form-data" class="form mt-2">
-        {% csrf_token %}
-        {% bootstrap_form form %}
-        {% buttons %}
-            <button type="submit" class="btn btn-primary">Nova Tarefa</button>
-        {% endbuttons %}
-    </form>
+    <a class="btn btn-primary" href="{% url 'achievements:createtask' %}" role="button">Nova Tarefa</a>
     
     
     {% for task in lastest_task_list %}
-        
+            
             <div class="row mt-2">
                 <div class="col-1 bg-light">           
                     <img src="{{ task.icon.url }}" alt="{{ task.icon.url }}" class="img-thumbnail img-fluid rounded float-left" width="50px" height="50px">
@@ -32,6 +25,8 @@
                     </div>
                 </div>
             </div> 
+            
+            
         
     {% endfor %}
     

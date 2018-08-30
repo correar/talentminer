@@ -1,0 +1,18 @@
+{% extends 'base.html' %}
+
+{% block content %}
+{% load bootstrap4 %}
+    <span class="d-block p-2 bg-primary text-white">Adicionar Conquistas</span>
+    <form action="" method="post" enctype="multipart/form-data" class="form mt-2">
+        {% csrf_token %}
+        {% bootstrap_form form %}
+        {% buttons %}
+            <button type="submit" name="add" class="btn btn-success">Adicionar Conquistas</button>
+            <button type="submit" name="finish" class="btn btn-primary">Adicionar e Finalizar</button>
+        {% endbuttons %}
+    </form>
+
+    {% for achievement in latest_achievement_list %}
+        {{achievement.task}} - {{achievement.achievement}} - {{achievement.point}} - {{achievement.status}}
+    {% endfor %}
+{% endblock %}
