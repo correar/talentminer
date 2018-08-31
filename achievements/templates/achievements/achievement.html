@@ -11,8 +11,27 @@
             <button type="submit" name="finish" class="btn btn-primary">Adicionar e Finalizar</button>
         {% endbuttons %}
     </form>
-
-    {% for achievement in latest_achievement_list %}
-        {{achievement.task}} - {{achievement.achievement}} - {{achievement.point}} - {{achievement.status}}
-    {% endfor %}
+    <div class="table-responsive">
+        <table class="table table-hover table-sm">
+            <thead>
+                <tr>
+                    <th>Conquista</th>
+                    <th>Pontos</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for achievement in latest_achievement_list %}
+                    <tr>
+                        <td>
+                            {{achievement.achievement}}
+                        </td>
+                        <td>
+                            {{achievement.point}}
+                        </td>
+                    </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+    
 {% endblock %}

@@ -3,12 +3,13 @@
   <head>
     <meta charset="utf-8">
     <title>{% block title %}Talent miner{% endblock %}</title>
-    {% block stylesheet %}{% endblock %}  <!-- HERE -->
+    {% block stylesheet %}
+    {% endblock %}  <!-- HERE -->
   </head>
   <body>
     
     {% block body %}  <!-- HERE -->
-      <div class="container mt-5">
+      <div class="container mt-5 mb-5">
         {% block content %}
         {% endblock %}
       </div>

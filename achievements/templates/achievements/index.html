@@ -1,18 +1,67 @@
 {% extends 'base.html' %}
-
 {% block content %}
 {% load bootstrap4 %}
+
     <a class="btn btn-primary" href="{% url 'achievements:createtask' %}" role="button">Nova Tarefa</a>
     
+    <div class="row mt-2">
+        <div class="col">
+            <div class="table-responsive">
+                <table class="table table-hover table-sm">
+                    <thead>
+                        <tr>
+                            <th>
+                                Tarefa
+                            </th>
+                            <th>
+                                Conquista
+                            </th>
+                            <th>
+                                Ação
+                            </th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                    {% for k,v in results.items %}
+                        {% for task in v %}
+                            {% if not task.count %}
+                            <tr>
+                                <td>{{task.name}}</td>
+                                <td>{{task.achievement}}</td>
+                                <td>
+                                    {% if task.name %}
+                                        <a class="btn btn-primary btn-block" href="{% url 'achievements:createachievement' task_id=task.pk %}">Nova Conquista</a>
+                                    {% else %}
+                                        {% if task.status == False %}
+                                            <a class="btn btn-success btn-block" href="{% url 'achievements:statusachievement' achievement_id=task.pk status=True %}">Ativar</a>
+                                        {% else %}
+                                            <a class="btn btn-danger btn-block" href="{% url 'achievements:statusachievement' achievement_id=task.pk status=False %}">Desativar</a>
+                                        {% endif %}
+                                    {% endif %}
+                                </td>
+                            </tr>
+                            {% endif %}
+                        {% endfor %}
+                    {% endfor %}
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
     
-    {% for task in lastest_task_list %}
-            
+    {% for k, v in results.items %}
+    
+        {% for task in v %}
+            {% if task.name %}
             <div class="row mt-2">
-                <div class="col-1 bg-light">           
-                    <img src="{{ task.icon.url }}" alt="{{ task.icon.url }}" class="img-thumbnail img-fluid rounded float-left" width="50px" height="50px">
+                <div class="col-1 bg-light">    
+                    <div >
+                        {{task.pk}}
+                    </div>       
+                    <img src="{{ task.icon.url }}" alt="{{ task.icon.url }}" class="img-thumbnail img-fluid rounded float-left" width="50px" height="50px"> 
                 </div>
                 <div class="col-3 bg-light">
-                    <div>
+                    <div class="bg-light">
                         <span class="font-weight-bold">{{ task.name }}</span>
                     </div>
                     <div class="bg-light">
@@ -24,9 +73,29 @@
                         <img src="{{ task.star.url }}" alt="{{ task.star.url }}" class="img-thumbnail img-fluid" width="50px" height="50px">
                     </div>
                 </div>
-            </div> 
+            </div>
+            {% endif %}
+            {% if task.count > 0 %}
+            <div class="row">
+                <div class="col-4 bg-light">
+                    <div class="bg-light mt-2">
+                        <div class="progress">
+                            <div class="progress-bar" role="progressbar" style="width: {{task.pb}}%" aria-valuenow="{{task.pb}}" aria-valuemin="0" aria-valuemax="100"></div>
+                          </div>
+                    </div>
+                    <div class="bg-light">
+                        {{task.tcount}}/{{ task.count }} Conquistas
+                    </div>    
+                </div>
+                <div class="col-1 bg-light">
+                    <div>
+                        {{task.ttotal}}/{{task.total}} Pontos
+                    </div>
+                </div>
+            </div>
+            {% endif %}
             
-            
+        {% endfor %}
         
     {% endfor %}
     

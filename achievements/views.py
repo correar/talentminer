@@ -6,17 +6,31 @@ from itertools import chain
 
 # Create your views here.
 def index(request):
-    '''results = {}
+    results = {}
+    total = 0
     lastest_task_list = Task.objects.all()
     for task in lastest_task_list:
+        total = 0
+        ftotal = 0
+        ttotal = 0
+        count = 0
+        fcount = 0
+        tcount = 0
+        pb = 0
         results.setdefault(task.pk, []).append(task)
+        for achievement in Achievement.objects.filter(task=task.pk, status=False):
+            fcount+=1
+            ftotal = ftotal+achievement.point
+        for achievement in Achievement.objects.filter(task=task.pk, status=True):
+            tcount+=1
+            ttotal = ttotal+achievement.point
         for achievement in Achievement.objects.filter(task=task.pk):
-            results[task.pk].append(achievement)'''
-    lastest_task_list = Task.objects.all()
-    lastest_achievement_list = Achievement.objects.all()
-    result_list = list(chain(lastest_task_list, lastest_achievement_list))
-    context = {'lastest_task_list':lastest_task_list,
-    'lastest_achievement_list': lastest_achievement_list}
+            results[task.pk].append(achievement)
+        count = fcount + tcount
+        total = ftotal + ttotal
+        pb = tcount / count * 100.0
+        results[task.pk].append({'count':count, 'total':total, 'tcount':tcount, 'ttotal':ttotal, 'pb':pb})
+    context = {'lastest_task_list':lastest_task_list,'results':results}
     return render(request, 'achievements/index.html', context)
 
 def createtask(request):
@@ -46,3 +60,9 @@ def createachievement(request, task_id):
     t = Task.objects.get(pk=task_id)
     latest_achievement_list = t.achievement_set.all()
     return render(request, 'achievements/achievement.html', {'form':form, 'latest_achievement_list': latest_achievement_list})
+
+def statusachievement(request, achievement_id, status):
+    achievement = Achievement.objects.get(pk=achievement_id)
+    achievement.status = status
+    achievement.save()
+    return redirect('achievements:index')
