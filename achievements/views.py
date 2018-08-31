@@ -8,7 +8,7 @@ from itertools import chain
 def index(request):
     results = {}
     total = 0
-    lastest_task_list = Task.objects.all()
+    lastest_task_list = Task.objects.all().order_by('pk')
     for task in lastest_task_list:
         total = 0
         ftotal = 0
@@ -24,7 +24,7 @@ def index(request):
         for achievement in Achievement.objects.filter(task=task.pk, status=True):
             tcount+=1
             ttotal = ttotal+achievement.point
-        for achievement in Achievement.objects.filter(task=task.pk):
+        for achievement in Achievement.objects.filter(task=task.pk).order_by('pk'):
             results[task.pk].append(achievement)
         count = fcount + tcount
         total = ftotal + ttotal

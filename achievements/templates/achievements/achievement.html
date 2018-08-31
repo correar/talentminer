@@ -7,8 +7,12 @@
         {% csrf_token %}
         {% bootstrap_form form %}
         {% buttons %}
-            <button type="submit" name="add" class="btn btn-success">Adicionar Conquistas</button>
-            <button type="submit" name="finish" class="btn btn-primary">Adicionar e Finalizar</button>
+            <div class="mr-2 mb-2 float-left">
+                <button type="submit" name="add" class="btn btn-success">Adicionar Conquistas</button>
+            </div>
+            <div class="">
+                <button type="submit" name="finish" class="btn btn-primary">Adicionar e Finalizar</button>
+            </div>
         {% endbuttons %}
     </form>
     <div class="table-responsive">
