@@ -10,7 +10,6 @@ Python web project evaluation exam
 ## Tech
     - Django 2.1
     - Python 3
-    - psycopg2
     - postgreSQL
 
 ## Not Implemented
@@ -21,6 +20,12 @@ Python web project evaluation exam
 ### Requirement
     - Docker
     - docker-compose
+    - Django 2.1
+    - Python 3
+    - psycopg2
+    - postgreSQL
+    - Pillow
+    - django-bootstrap4
     
 ### Docker
 This project is very easy to install and deploy in a Docker container.
