@@ -3,13 +3,18 @@
 Python web project evaluation exam
 
   - Responsive mobile screen
-  - Form to edit information and upload icon
-  - Progressive Bar
+  - Form to create Tasks and Achievements
+  - Table Achievement control
+  - Progressive Bar achievement view
  
 ## Tech
     - Django 2.1
     - Python 3
     - psycopg2
+    - postgreSQL
+
+## Not Implemented
+    - Edit and Delete Task and Achievements
 
 ## Installation
 
